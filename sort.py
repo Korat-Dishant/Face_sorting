@@ -7,7 +7,6 @@ import sys
 path_data = "./data/"
 path_sorted = "./sorted/"
 new_image_number = 0
-tf = False
 faces = []
 
 for data_image in os.listdir(path_data):
