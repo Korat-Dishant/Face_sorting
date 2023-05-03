@@ -4,9 +4,10 @@ import os
 import shutil
 import sys
 
-path_data = "data"
-path_sorted = "sorted"
-
+path_data = "data/"
+path_sorted = "sorted/"
+new_image_number = 0
+tf = False
 faces = []
 
 for data_image in os.listdir(path_data):
@@ -14,10 +15,20 @@ for data_image in os.listdir(path_data):
     rgb_img = cv2.cvtColor(dimg, cv2.COLOR_BGR2RGB)
     dimg_encoding = face_recognition.face_encodings(rgb_img)[0]
 
-    if dimg_encoding not in faces:
-        faces.append(dimg_encoding)
-        os.mkdir(path_sorted+str(len(faces)))
-        # move image to new folder 
+    for i in faces:
+        if i == dimg_encoding :
+            tf = True
+    print(tf, "for image = ", data_image)
+    faces.append(dimg_encoding)
+  
+    # if not tf:
+    #     faces.append(dimg_encoding)
+    #     new_image_number = str(len(faces))
+    #     os.mkdir(path_sorted+new_image_number)
+    #     # move image to new folder 
+    #     shutil.copy(path_data+data_image , path_sorted+new_image_number )
     
-    else:
-        # move image to folder of index where its located 
+    # else:
+    #     # move image to folder of index where its located 
+    #     shutil.copy(path_data+data_image , path_sorted+new_image_number )
+
